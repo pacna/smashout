@@ -10,10 +10,10 @@ impl Collided {
 }
 
 #[derive(Component)]
-pub struct Counter(i32);
+pub struct Count(i32);
 
-impl Counter {
-    pub fn new(value: i32) -> Counter {
-        return Counter(value);
+impl Count {
+    pub fn new(value: i32) -> Count {
+        return Count(value);
     }
 }
