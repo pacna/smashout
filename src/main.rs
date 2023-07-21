@@ -1,8 +1,10 @@
-use bevy::{prelude::{default, PluginGroup, App }, DefaultPlugins, window::{WindowPlugin, Window}};
-use smashout::renderer::{render_score_board, render_ball, render_background, render_bricks, render_player};
-use smashout::sizes::{WINDOW_WIDTH, WINDOW_HEIGHT};
+use bevy::{prelude::{default, PluginGroup, App, Update, Last, Startup}, DefaultPlugins};
+use bevy::window::{WindowPlugin, Window};
+use smashout::handler::{move_player, move_ball, check_window_collision, check_player_collision, check_brick_collision, you_won};
+use smashout::renderer::{render_score_board, render_ball, render_background, render_bricks, render_player, render_victory};
+use smashout::constants::sizes::{WINDOW_WIDTH, WINDOW_HEIGHT};
 
-fn main() {
+fn main() -> () {
 
     App::new()
     .add_plugins(DefaultPlugins.set(WindowPlugin {
@@ -14,10 +16,23 @@ fn main() {
         }),
         ..default()
     }))
-    .add_startup_system(render_background)
-    .add_startup_system(render_score_board)
-    .add_startup_system(render_bricks)
-    .add_startup_system(render_ball)
-    .add_startup_system(render_player)
+    .add_systems(Startup, (
+        render_background,
+        render_score_board,
+        render_victory,
+        render_bricks,
+        render_ball,
+        render_player
+    ))
+    .add_systems(Update,(
+        move_ball,
+        move_player
+    ))
+    .add_systems(Update, (
+        check_window_collision,
+        check_player_collision,
+        check_brick_collision
+    ))
+    .add_systems(Last, you_won)
     .run();
 }

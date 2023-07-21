@@ -1,4 +1,4 @@
-use bevy::{prelude::Color};
+use bevy::prelude::Color;
 use lazy_static::lazy_static;
 
 
