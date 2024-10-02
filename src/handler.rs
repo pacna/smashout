@@ -18,11 +18,11 @@ pub fn move_player(
 
     let screen_width: f32 = (window.width() / 2.0) - (BRICK_WIDTH / 2.0);
 
-    if keyboard_input.pressed(KeyCode::Left) {
+    if keyboard_input.pressed(KeyCode::Left) || keyboard_input.pressed(KeyCode::A) {
         player_transform.translation.x -= PLAYER_SPEED;
     }
 
-    if keyboard_input.pressed(KeyCode::Right) {
+    if keyboard_input.pressed(KeyCode::Right) || keyboard_input.pressed(KeyCode::D) {
         player_transform.translation.x += PLAYER_SPEED;
     }
 
